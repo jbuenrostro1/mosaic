@@ -22,22 +22,7 @@ import java.util.Random;
  * Credit: ShapesLibrary
  */ 
 
-	// mosaic circle and square class to implement them in interface
-	class MosaicCircle extends Circle {
-		public MosaicCircle() {
-			super();
-		}
-	}
-
-	class MosaicSquare extends Rectangle {
-		public MosaicSquare() {
-			super();
-		}
-	}
-
 	class MosaicShapes extends JPanel {
-		private MosaicCircle circle;
-		private MosaicSquare square;
 		private int red, blue, green;
 		private String alphabet;
 		
