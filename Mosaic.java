@@ -15,10 +15,10 @@ import java.util.Random;
 /*
  * Jazmin Buenrostro
  * Mosaic
- * Credit: ShapesLibrary
+ * Credit: MosaicLite
  */ 
 
-	class MosaicTiles extends JPanel {
+	class MosaicTiles extends JButton {
 		private int red, blue, green, randLetter, randShape;
 		private String[] alphabetArrayList = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J",
 				"K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
@@ -61,6 +61,9 @@ import java.util.Random;
 		Random myRandomValue = new Random();
 		return min + myRandomValue.nextInt(max-min+1);
 	}
+	public class FaceShape extends OvalFace {
+		
+	}
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -70,16 +73,13 @@ import java.util.Random;
 		
 		g.setColor(new Color(red, blue, green));
 		
-		/*if (GetInbetweenValue(0,1) == 1) {
-		g.fillRect(5, 5, widthOfPanel-2, heightOfPanel-2);	
-		} else { 
-			g.fillOval(5, 5, widthOfPanel-5, heightOfPanel-5);*/
 		if (randShape == 0) {
 			g.fillRect(5, 5, widthOfPanel-2, heightOfPanel-2);
 		} else {
 			g.fillOval(5, 5, widthOfPanel-5, heightOfPanel-5);
-		}
+			
 		g.setColor(new Color(GetOpposingColor(red), GetOpposingColor(blue), GetOpposingColor(green)));
+	
 		
 		// get font
 		final int sizeOfFont = 20;
@@ -87,11 +87,10 @@ import java.util.Random;
 		int stringJ = (widthOfPanel) - 50;
 		int stringK = (heightOfPanel) - 25;
 		
-		//g.drawString(String.valueOf(GetInbetweenValueTwo(65,90)), stringJ, stringK);
 		g.drawString(letters, stringJ, stringK);
 		System.out.println(toString());
 	}
-
+}
 	
 	public String toString() {
 		String string;
@@ -146,9 +145,7 @@ import java.util.Random;
 			for (MosaicTiles tiles:tilesList) {
 				tiles.SetValueAtRandom();
 			}
-			
 			repaint();
-			System.out.print("Start paint...");
 		}	
 		
 	}
@@ -160,6 +157,7 @@ import java.util.Random;
 			System.out.println("Starting Mosaic...");
 			
 			// display window on interface
+			System.out.print("Start paint***");
 			MosaicFrame myMosaicFrame = new MosaicFrame();
 			myMosaicFrame.setVisible(true);		
 	
