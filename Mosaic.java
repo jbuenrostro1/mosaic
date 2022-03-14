@@ -61,9 +61,10 @@ import java.util.Random;
 		Random myRandomValue = new Random();
 		return min + myRandomValue.nextInt(max-min+1);
 	}
-	public class FaceShape extends OvalFace {
+	//public class FaceShape extends JPanel {
 		
-	}
+			
+		//}
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -75,8 +76,10 @@ import java.util.Random;
 		
 		if (randShape == 0) {
 			g.fillRect(5, 5, widthOfPanel-2, heightOfPanel-2);
-		} else {
+		} else if (randShape == 1) {
 			g.fillOval(5, 5, widthOfPanel-5, heightOfPanel-5);
+		}
+			//System.out.print(Faces);
 			
 		g.setColor(new Color(GetOpposingColor(red), GetOpposingColor(blue), GetOpposingColor(green)));
 	
@@ -90,7 +93,6 @@ import java.util.Random;
 		g.drawString(letters, stringJ, stringK);
 		System.out.println(toString());
 	}
-}
 	
 	public String toString() {
 		String string;
