@@ -1,18 +1,14 @@
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JButton;
-
 import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.BorderLayout;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
 import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.Font;
-
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -22,12 +18,30 @@ import java.util.Random;
  * Credit: ShapesLibrary
  */ 
 
-	class MosaicShapes extends JPanel {
-		private int red, blue, green;
-		private String alphabet;
+	class MosaicTiles extends JPanel {
+		private int red, blue, green, randLetter, randShape;
+		private String[] alphabetArrayList = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J",
+				"K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
+		private String letters;
+		
+		public String getLetters() {
+			return letters;
+		}
+	
+		public void setRandLetters() {
+			this.letters = letters;
+		}
+		
+		public int getRandShape() {
+			return randShape;
+		}
+		
+		public void setRandShape() {
+			this.randShape = randShape;
+		}
 		
 		// constructor method
-		MosaicShapes() {
+		MosaicTiles() {
 			super();
 			SetValueAtRandom();
 		}
@@ -37,70 +51,15 @@ import java.util.Random;
 			blue = GetInbetweenValue(0,255);
 			green = GetInbetweenValue(0,255);
 			
-			alphabet = "A";
-			if (GetInbetweenValue(1,26) == 2) {
-				alphabet = "B";
-			} else if (GetInbetweenValue(1,26) == 3){
-				alphabet = "C";
-			} else if (GetInbetweenValue(1,26) == 4){
-				alphabet = "D";
-			} else if (GetInbetweenValue(1,26) == 5){
-				alphabet = "E";
-			} else if (GetInbetweenValue(1,26) == 6){
-				alphabet = "F";
-			} else if (GetInbetweenValue(1,26) == 7){
-				alphabet = "G";
-			} else if (GetInbetweenValue(1,26) == 8){
-				alphabet = "H";
-			} else if (GetInbetweenValue(1,26) == 9){
-				alphabet = "I";
-			} else if (GetInbetweenValue(1,26) == 10){
-				alphabet = "J";
-			} else if (GetInbetweenValue(1,26) == 11){
-				alphabet = "K";
-			} else if (GetInbetweenValue(1,26) == 12){
-				alphabet = "L";
-			} else if (GetInbetweenValue(1,26) == 13){
-				alphabet = "M";
-			} else if (GetInbetweenValue(1,26) == 14){
-				alphabet = "N";
-			} else if (GetInbetweenValue(1,26) == 15){
-				alphabet = "O";
-			} else if (GetInbetweenValue(1,26) == 16){
-				alphabet = "P";
-			} else if (GetInbetweenValue(1,26) == 17){
-				alphabet = "Q";
-			} else if (GetInbetweenValue(1,26) == 18){
-				alphabet = "R";
-			} else if (GetInbetweenValue(1,26) == 19){
-				alphabet = "S";
-			} else if (GetInbetweenValue(1,26) == 20){
-				alphabet = "T";
-			} else if (GetInbetweenValue(1,26) == 21){
-				alphabet = "U";
-			} else if (GetInbetweenValue(1,26) == 22){
-				alphabet = "V";
-			} else if (GetInbetweenValue(1,26) == 23){
-				alphabet = "W";
-			} else if (GetInbetweenValue(1,26) == 24){
-				alphabet = "X";
-			} else if (GetInbetweenValue(1,26) == 25){
-				alphabet = "Y";
-			} else if (GetInbetweenValue(1,26) == 26){
-				alphabet = "Z";
-				
-				}
+			randLetter = GetInbetweenValue(0,25);
+			letters = alphabetArrayList[randLetter];
+			randShape = GetInbetweenValue(0,1);
 			
-			}
+		}
 	
 	public static int GetInbetweenValue(int min, int max) {
 		Random myRandomValue = new Random();
 		return min + myRandomValue.nextInt(max-min+1);
-	}
-	
-	public static char GetInbetweenValueTwo(int min, int max) {
-		Random myRandomValue = new Random();
-		return (char)(min + myRandomValue.nextInt(max-min+1));
 	}
 	
 	public void paintComponent(Graphics g) {
@@ -111,13 +70,15 @@ import java.util.Random;
 		
 		g.setColor(new Color(red, blue, green));
 		
-		if (GetInbetweenValue(0,1) == 1) {
+		/*if (GetInbetweenValue(0,1) == 1) {
+		g.fillRect(5, 5, widthOfPanel-2, heightOfPanel-2);	
+		} else { 
+			g.fillOval(5, 5, widthOfPanel-5, heightOfPanel-5);*/
+		if (randShape == 0) {
 			g.fillRect(5, 5, widthOfPanel-2, heightOfPanel-2);
-			//g.fillOval(5, 5, widthOfPanel-5, heightOfPanel-5);
 		} else {
 			g.fillOval(5, 5, widthOfPanel-5, heightOfPanel-5);
-			//g.fillRect(10, 10, widthOfPanel-2, heightOfPanel-2);
-		
+		}
 		g.setColor(new Color(GetOpposingColor(red), GetOpposingColor(blue), GetOpposingColor(green)));
 		
 		// get font
@@ -127,9 +88,23 @@ import java.util.Random;
 		int stringK = (heightOfPanel) - 25;
 		
 		//g.drawString(String.valueOf(GetInbetweenValueTwo(65,90)), stringJ, stringK);
-		g.drawString(alphabet, stringJ, stringK);
+		g.drawString(letters, stringJ, stringK);
+		System.out.println(toString());
 	}
-}
+
+	
+	public String toString() {
+		String string;
+		if (randShape == 0) {
+			string = "Oval";
+		} else {
+			string = "Square";
+			
+		return String.format("Shape: " + string + "\nLetters: " + letters + "\nColor of shapes: " + red, blue, green);
+		
+		}
+		return string;
+	}
 	
 	public static int GetOpposingColor(int color) {
 		return ((color+128)%256);
@@ -138,7 +113,7 @@ import java.util.Random;
 }
 	
 	class MosaicFrame extends JFrame implements ActionListener {
-		private ArrayList<MosaicShapes>shapesList;
+		private ArrayList<MosaicTiles>tilesList;
 		
 		// constructor method
 		public MosaicFrame() { // creating window on interface
@@ -159,20 +134,21 @@ import java.util.Random;
 			paneContents.add(mosaicGridPanel, BorderLayout.CENTER);
 			mosaicGridPanel.setLayout(new GridLayout(12,12));
 			
-			shapesList = new ArrayList<MosaicShapes>();
-			for (int i = 1; i < 144; i++) {
-				MosaicShapes shapes = new MosaicShapes();
-				shapesList.add(shapes);
-				mosaicGridPanel.add(shapes);
+			tilesList = new ArrayList<MosaicTiles>();
+			for (int i = 0; i < 144; i++) {
+				MosaicTiles tiles = new MosaicTiles();
+				tilesList.add(tiles);
+				mosaicGridPanel.add(tiles);
 			}
 		}
 		
 		public void actionPerformed(ActionEvent e) {
-			for (MosaicShapes shapes:shapesList) {
-				shapes.SetValueAtRandom();
+			for (MosaicTiles tiles:tilesList) {
+				tiles.SetValueAtRandom();
 			}
 			
 			repaint();
+			System.out.print("Start paint...");
 		}	
 		
 	}
